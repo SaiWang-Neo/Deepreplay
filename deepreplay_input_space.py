@@ -98,7 +98,7 @@ ax.scatter(X[:, 0].numpy(), X[:, 1].numpy(), c=y.numpy().ravel(), cmap='bwr', ed
 ax.set_xlabel('X1')
 ax.set_ylabel('X2')
 ax.set_title(f"Input Space with Boundary at Epoch {epoch_to_plot}")
-plt.savefig("input_space_epoch140_boundary_pytorch.png", dpi=120)
+plt.savefig("input_space_epoch200_boundary_pytorch.png", dpi=120)
 
 # 6. 可视化特征空间（保留原有的散点和网格）
 fig, ax = plt.subplots(figsize=(6, 6))
