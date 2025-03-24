@@ -3,15 +3,20 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from deepreplay.datasets.parabola import load_data
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-# 1. 加载数据
-X, y = load_data()
-X = torch.tensor(X, dtype=torch.float32)
-y = torch.tensor(y, dtype=torch.float32).view(-1, 1)
+# 设置随机种子以确保结果可重现
+torch.manual_seed(41)  # PyTorch 的随机种子
+
+# 加载数据
+data = np.loadtxt('datasets.txt')
+X_loaded = data[:, :2]  # 前两列是 X
+y_loaded = data[:, 2:]  # 最后一列是 y
+
+X = torch.tensor(X_loaded, dtype=torch.float32)
+y = torch.tensor(y_loaded, dtype=torch.float32).view(-1, 1)
 
 # 2. 定义 PyTorch 模型
 class SimpleNN(nn.Module):
@@ -35,7 +40,7 @@ criterion = nn.BCELoss()
 optimizer = optim.SGD(model.parameters(), lr=3)
 
 # 4. 训练并收集隐藏层输出和网格变换
-epochs = 250  # 匹配图片中的 epoch 数
+epochs = 200  # 匹配图片中的 epoch 数
 hidden_outputs = []
 grid_transforms = []
 decision_outputs = []
@@ -75,7 +80,7 @@ print(f"Decision output range at epoch {epochs}: {decision_outputs[-1].min()} - 
 
 # 5. 可视化输入空间的边界（类似图片）
 fig, ax = plt.subplots(figsize=(6, 6))
-epoch_to_plot = 140  # 匹配图片
+epoch_to_plot = epoch  # 匹配图片
 decision_out = decision_outputs[epoch_to_plot - 1]
 
 # 绘制背景颜色（输入空间）
