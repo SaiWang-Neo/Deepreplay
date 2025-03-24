@@ -104,7 +104,7 @@ for i in range(20):
 ax.set_xlabel('Hidden 1')
 ax.set_ylabel('Hidden 2')
 ax.set_title(f"Feature Space with Boundary at Epoch {epoch_to_plot}")
-plt.savefig("feature_space_epoch140_boundary_pytorch.png", dpi=120)
+plt.savefig("feature_space_epoch200_boundary_pytorch.png", dpi=120)
 
 # 6. 生成动画（特征空间，固定坐标轴为 0 到 1）
 fig, ax = plt.subplots(figsize=(6, 6))
