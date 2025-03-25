@@ -52,9 +52,11 @@
    ```bash
    pip install torch numpy matplotlib
    ```
-2. 安装 FFmpeg（用于生成动画）：
+2. 安装 FFmpeg (MP4) or PillowWriter (GIF)（用于生成动画）：
    - 在 Linux/macOS 上：`sudo apt-get install ffmpeg` 或 `brew install ffmpeg`
    - 在 Windows 上：下载 FFmpeg 并添加至环境变量。
+   - 在 Linux/macOS 上：`pip install pillow`
+
 3. 将代码保存为两个文件：
    - `input_space_visualization.py`：生成输入空间的静态图和动画。
    - `feature_space_visualization.py`：生成特征空间的静态图和动画。
@@ -70,11 +72,11 @@
 以下是使用代码生成的两幅静态图和两个动画视频的展示：
 
 ### 静态图
-1. **输入空间 (Epoch 200)** 
+1. **输入空间 (Epoch 200)**
    <img src="input_space_epoch200_boundary_pytorch.png" alt="Input Space with Boundary at Epoch 200" width="300" />
    - 显示输入空间中的决策边界（黑色轮廓线）、网格变换（黑色细线）和数据点分布（红蓝散点）。
 
-3. **特征空间 (Epoch 200)**  
+2. **特征空间 (Epoch 200)**
    <img src="feature_space_epoch200_boundary_pytorch.png" alt="Feature Space with Boundary at Epoch 200" width="300" />
    - 显示隐藏层输出空间中的决策边界（黑色轮廓线）、网格变换（黑色细线）和数据点分布（红蓝散点）。
 
