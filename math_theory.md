@@ -1,147 +1,150 @@
-# 神经网络实现逻辑与数学公式
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
 
-以下是对基于 PyTorch 的简单两层神经网络实现逻辑的梳理，并用数学公式刻画整个过程。该网络用于二分类任务，并通过可视化展示训练过程中隐藏层的表示变化。
+\title{Implementation Logic and Mathematical Formulation of a Neural Network Visualization}
+\author{}
+\date{}
 
----
+\begin{document}
 
-## 1. 数据加载与预处理
-- **数据加载**：从文件 `datasets.txt` 中读取数据，假设每行数据包含两个输入特征和一个标签。
-- **数据转换**：将读取的数据转换为 PyTorch 张量。
-  - 输入特征矩阵：\( \mathbf{X} \in \mathbb{R}^{N \times 2} \)，其中 \( N \) 是样本数量。
-  - 标签向量：\( \mathbf{y} \in \mathbb{R}^{N \times 1} \)。
+\maketitle
 
----
+\section*{Implementation Logic and Mathematical Formulation}
 
-## 2. 模型定义
-- **神经网络结构**：一个两层全连接神经网络。
-  - **隐藏层**：输入维度为 2，隐藏层神经元数量为 \( H \)（可调参数，例如 `HIDDEN_SIZE`）。
-  - **输出层**：隐藏层输出映射到 1 维。
-- **激活函数**：隐藏层和输出层均使用 Sigmoid 函数，定义为：
-  \[
-  \sigma(z) = \frac{1}{1 + e^{-z}}
-  \]
-- **权重初始化**：
-  - 隐藏层权重 \( \mathbf{W}_h \) 使用 Xavier 正态初始化。
-  - 输出层权重 \( \mathbf{W}_o \) 使用标准正态初始化。
-- **数学表示**：
-  - 隐藏层输出：
-    \[
-    \mathbf{h} = \sigma(\mathbf{W}_h \mathbf{x} + \mathbf{b}_h)
-    \]
-    其中 \( \mathbf{W}_h \in \mathbb{R}^{H \times 2} \)，\( \mathbf{b}_h \in \mathbb{R}^{H} \)。
-  - 输出层输出：
-    \[
-    \hat{y} = \sigma对我来说(\mathbf{W}_o \mathbf{h} + \mathbf{b}_o)
-    \]
-    其中 \( \mathbf{W}_o \in \mathbb{R}^{1 \times H} \)，\( \mathbf{b}_o \in \mathbb{R} \)。
+\subsection*{1. Data Loading and Preprocessing}
+\textbf{Data Loading and Preprocessing} \\
+- \textit{Data Loading}: Data is read from the file \texttt{datasets.txt}, assuming each row contains two input features and one label. \\
+- \textit{Data Conversion}: The loaded data is converted into PyTorch tensors. \\
+\quad - Input feature matrix: \( \mathbf{X} \in \mathbb{R}^{N \times 2} \), where \( N \) is the number of samples. \\
+\quad - Label vector: \( \mathbf{y} \in \mathbb{R}^{N \times 1} \).
 
----
+\subsection*{2. Model Definition}
+\textbf{Model Definition} \\
+- \textit{Neural Network Structure}: A two-layer fully connected neural network. \\
+\quad - \textit{Hidden Layer}: Input dimension is 2, with \( H \) hidden neurons (adjustable parameter, e.g., \texttt{HIDDEN\_SIZE}). \\
+\quad - \textit{Output Layer}: Maps hidden layer output to 1 dimension. \\
+- \textit{Activation Function}: Sigmoid function used for both layers, defined as: \\
+\[
+\sigma(z) = \frac{1}{1 + e^{-z}}
+\] \\
+- \textit{Weight Initialization}: \\
+\quad - Hidden layer weights \( \mathbf{W}_h \) use Xavier normal initialization. \\
+\quad - Output layer weights \( \mathbf{W}_o \) use standard normal initialization. \\
+- \textit{Mathematical Representation}: \\
+\quad - Hidden layer output: \\
+\[
+\mathbf{h} = \sigma(\mathbf{W}_h \mathbf{x} + \mathbf{b}_h)
+\] \\
+\quad where \( \mathbf{W}_h \in \mathbb{R}^{H \times 2} \), \( \mathbf{b}_h \in \mathbb{R}^{H} \). \\
+\quad - Output layer output: \\
+\[
+\hat{y} = \sigma(\mathbf{W}_o \mathbf{h} + \mathbf{b}_o)
+\] \\
+\quad where \( \mathbf{W}_o \in \mathbb{R}^{1 \times H} \), \( \mathbf{b}_o \in \mathbb{R} \).
 
-## 3. 损失函数与优化器
-- **损失函数**：使用二元交叉熵损失（BCELoss），定义为：
-  \[
-  \mathcal{L} = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]
-  \]
-- **优化器**：随机梯度下降（SGD），学习率设为 3。参数更新公式为：
-  \[
-  \theta \leftarrow \theta - \eta \nabla_\theta \mathcal{L}
-  \]
-  其中 \( \theta = \{\mathbf{W}_h, \mathbf{b}_h, \mathbf{W}_o, \mathbf{b}_o\} \)，\( \eta = 3 \)。
+\subsection*{3. Loss Function and Optimizer}
+\textbf{Loss Function and Optimizer} \\
+- \textit{Loss Function}: Binary Cross-Entropy Loss (BCELoss), defined as: \\
+\[
+\mathcal{L} = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]
+\] \\
+- \textit{Optimizer}: Stochastic Gradient Descent (SGD) with learning rate 3. Parameter update rule: \\
+\[
+\theta \leftarrow \theta - \eta \nabla_\theta \mathcal{L}
+\] \\
+where \( \theta = \{\mathbf{W}_h, \mathbf{b}_h, \mathbf{W}_o, \mathbf{b}_o\} \), \( \eta = 3 \).
 
----
+\subsection*{4. Training Process}
+\textbf{Training Process} \\
+- \textit{Training Epochs}: 200 epochs. \\
+- \textit{Per Epoch Operations}: \\
+\quad 1. \textit{Forward Pass}: Compute hidden layer output \( \mathbf{h} \) and model output \( \hat{y} \). \\
+\quad 2. \textit{Loss Computation}: Calculate \( \mathcal{L} \) based on \( \hat{y} \) and \( \mathbf{y} \). \\
+\quad 3. \textit{Backward Pass}: Compute gradients of \( \mathcal{L} \) with respect to model parameters. \\
+\quad 4. \textit{Parameter Update}: Update \( \theta \) using the optimizer.
 
-## 4. 训练过程
-- **训练轮数**：共 200 轮。
-- **每轮操作**：
-  1. **前向传播**：计算隐藏层输出 \( \mathbf{h} \) 和模型输出 \( \hat{y} \)。
-  2. **计算损失**：根据 \( \hat{y} \) 和 \( \mathbf{y} \) 计算 \( \mathcal{L} \)。
-  3. **反向传播**：计算损失对模型参数的梯度。
-  4. **参数更新**：使用优化器更新 \( \theta \)。
+\subsection*{5. Grid Generation}
+\textbf{Grid Generation} \\
+- \textit{Coarse Grid}: Generate a \( G \times G \) grid in the input space [-1, 1] \(\times\) [-1, 1] (\( G = \) \texttt{GRID\_SIZE}). \\
+\quad - Grid point coordinates: \\
+\[
+\mathbf{G} = \{ (x_i, y_j) \mid x_i = -1 + \frac{2i}{G-1}, y_j = -1 + \frac{2j}{G-1}, i,j=0,\dots,G-1 \}
+\] \\
+- \textit{Fine Grid}: Generate a \( F \times F \) grid in the same input space (\( F = \) \texttt{FINE\_GRID\_SIZE}). \\
+\quad - Grid point coordinates: \\
+\[
+\mathbf{F} = \{ (x_k, y_l) \mid x_k = -1 + \frac{2k}{F-1}, y_l = -1 + \frac{2l}{F-1}, k,l=0,\dots,F-1 \}
+\]
 
----
+\subsection*{6. Hidden Layer Mapping}
+\textbf{Hidden Layer Mapping} \\
+- \textit{Coarse Grid Mapping}: Map coarse grid points \( \mathbf{g} \in \mathbf{G} \) to the hidden space: \\
+\[
+\mathbf{h}_g = \sigma(\mathbf{W}_h \mathbf{g} + \mathbf{b}_h)
+\] \\
+- \textit{Fine Grid Mapping}: Map fine grid points \( \mathbf{f} \in \mathbf{F} \) to the hidden space: \\
+\[
+\mathbf{h}_f = \sigma(\mathbf{W}_h \mathbf{f} + \mathbf{b}_h)
+\] \\
+- \textit{Model Output}: Compute model predictions for fine grid points: \\
+\[
+\hat{y}_f = \sigma(\mathbf{W}_o \mathbf{h}_f + \mathbf{b}_o)
+\]
 
-## 5. 网格生成
-- **粗网格**：在输入空间 [-1, 1] × [-1, 1] 上生成 \( G \times G \) 的网格点（\( G = \) `GRID_SIZE`）。
-  - 网格点坐标：
-    \[
-    \mathbf{G} = \{ (x_i, y_j) \mid x_i = -1 + \frac{2i}{G-1}, y_j = -1 + \frac{2j}{G-1}, i,j=0,\dots,G-1 \}
-    \]
-- **细网格**：在相同输入空间生成 \( F \times F \) 的网格点（\( F = \) `FINE_GRID_SIZE`）。
-  - 网格点坐标：
-    \[
-    \mathbf{F} = \{ (x_k, y_l) \mid x_k = -1 + \frac{2k}{F-1}, y_l = -1 + \frac{2l}{F-1}, k,l=0,\dots,F-1 \}
-    \]
+\subsection*{7. Visualization}
+\textbf{Visualization} \\
+- \textit{Static Plot}: \\
+\quad - Use fine grid hidden mappings \( \mathbf{h}_f \) (first two dimensions) and model output \( \hat{y}_f \) to plot the decision boundary (\( \hat{y}_f = 0.5 \)). \\
+\quad - Plot training data points in the hidden space (based on \( \mathbf{h} \)). \\
+\quad - Use cubic spline interpolation to smoothly connect coarse grid mappings \( \mathbf{h}_g \) as grid lines. \\
+- \textit{Animation}: \\
+\quad - Dynamically display changes in the hidden space across epochs, including: \\
+\quad\quad - Movement of the decision boundary. \\
+\quad\quad - Updates to scatter points \( \mathbf{h} \). \\
+\quad\quad - Smooth transitions of grid lines \( \mathbf{h}_g \).
 
----
+\subsection*{8. Mathematical Formula Summary}
+\textbf{Mathematical Formula Summary} \\
+- \textit{Model}: \\
+\[
+\begin{align*}
+\mathbf{h} &= \sigma(\mathbf{W}_h \mathbf{x} + \mathbf{b}_h) \\
+\hat{y} &= \sigma(\mathbf{W}_o \mathbf{h} + \mathbf{b}_o)
+\end{align*}
+\] \\
+- \textit{Loss Function}: \\
+\[
+\mathcal{L} = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]
+\] \\
+- \textit{Optimization}: \\
+\[
+\theta \leftarrow \theta - \eta \nabla_\theta \mathcal{L}, \quad \eta = 3
+\] \\
+- \textit{Grid Mapping}: \\
+\[
+\mathbf{h}_g = \sigma(\mathbf{W}_h \mathbf{g} + \mathbf{b}_h), \quad \mathbf{g} \in \mathbf{G}
+\] \\
+\[
+\mathbf{h}_f = \sigma(\mathbf{W}_h \mathbf{f} + \mathbf{b}_h), \quad \mathbf{f} \in \mathbf{F}
+\] \\
+- \textit{Decision Boundary}: In the hidden space, determined by \( \hat{y}_f = 0.5 \), i.e.: \\
+\[
+\mathbf{W}_o \mathbf{h}_f + \mathbf{b}_o = 0
+\]
 
-## 6. 隐藏层映射
-- **粗网格映射**：将粗网格点 \( \mathbf{g} \in \mathbf{G} \) 映射到隐藏空间：
-  \[
-  \mathbf{h}_g = \sigma(\mathbf{W}_h \mathbf{g} + \mathbf{b}_h)
-  \]
-- **细网格映射**：将细网格点 \( \mathbf{f} \in \mathbf{F} \) 映射到隐藏空间：
-  \[
-  \mathbf{h}_f = \sigma(\mathbf{W}_h \mathbf{f} + \mathbf{b}_h)
-  \]
-- **模型输出**：对细网格点计算模型预测：
-  \[
-  \hat{y}_f = \sigma(\mathbf{W}_o \mathbf{h}_f + \mathbf{b}_o)
-  \]
+\subsection*{9. Spline Interpolation}
+\textbf{Spline Interpolation} \\
+- \textit{Cubic Spline Interpolation}: Used to smoothly connect coarse grid points in the hidden space \( \mathbf{h}_g \). \\
+\quad - For each horizontal or vertical grid line, the interpolation function \( s(t) \) satisfies \( s(t_i) = \mathbf{h}_i \), with continuous second derivatives.
 
----
+\subsection*{10. Animation Update}
+\textbf{Animation Update} \\
+- \textit{Per Frame Update}: \\
+\quad - Update decision boundary: Based on current \( \mathbf{h}_f \) and \( \hat{y}_f \). \\
+\quad - Update scatter points: Based on current \( \mathbf{h} \). \\
+\quad - Update grid lines: Based on current \( \mathbf{h}_g \), generating smooth curves via spline interpolation.
 
-## 7. 可视化
-- **静态图**：
-  - 使用细网格的隐藏层映射 \( \mathbf{h}_f \)（取前两个维度）和模型输出 \( \hat{y}_f \) 绘制决策边界（\( \hat{y}_f = 0.5 \)）。
-  - 绘制训练数据在隐藏空间的散点图（基于 \( \mathbf{h} \)）。
-  - 使用三次样条插值平滑连接粗网格映射 \( \mathbf{h}_g \) 的网格线。
-- **动画**：
-  - 动态展示每轮训练后隐藏空间的变化，包括：
-    - 决策边界的移动。
-    - 散点位置 \( \mathbf{h} \) 的更新。
-    - 网格线 \( \mathbf{h}_g \) 的平滑变化。
-
----
-
-## 8. 数学公式总结
-- **模型**：
-  \[
-  \begin{align*}
-  \mathbf{h} &= \sigma(\mathbf{W}_h \mathbf{x} + \mathbf{b}_h) \\
-  \hat{y} &= \sigma(\mathbf{W}_o \mathbf{h} + \mathbf{b}_o)
-  \end{align*}
-  \]
-- **损失函数**：
-  \[
-  \mathcal{L} = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]
-  \]
-- **优化**：
-  \[
-  \theta \leftarrow \theta - \eta \nabla_\theta \mathcal{L}, \quad \eta = 3
-  \]
-- **网格映射**：
-  \[
-  \mathbf{h}_g = \sigma(\mathbf{W}_h \mathbf{g} + \mathbf{b}_h), \quad \mathbf{g} \in \mathbf{G}
-  \]
-  \[
-  \mathbf{h}_f = \sigma(\mathbf{W}_h \mathbf{f} + \mathbf{b}_h), \quad \mathbf{f} \in \mathbf{F}
-  \]
-- **决策边界**：在隐藏空间中，由 \( \hat{y}_f = 0.5 \) 确定，即：
-  \[
-  \mathbf{W}_o \mathbf{h}_f + \mathbf{b}_o = 0
-  \]
-
----
-
-## 9. 样条插值
-- **三次样条插值**：用于平滑连接粗网格点在隐藏空间的映射 \( \mathbf{h}_g \)。
-  - 对每条水平或垂直网格线，插值函数 \( s(t) \) 满足 \( s(t_i) = \mathbf{h}_i \)，且二阶导数连续。
-
----
-
-## 10. 动画更新
-- **每帧更新**：
-  - 更新决策边界：基于当前 \( \mathbf{h}_f \) 和 \( \hat{y}_f \)。
-  - 更新散点：基于当前 \( \mathbf{h} \)。
-  - 更新网格线：基于当前 \( \mathbf{h}_g \)，通过样条插值生成平滑曲线。
-
+\end{document}
