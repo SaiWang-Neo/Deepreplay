@@ -85,7 +85,7 @@ epoch_to_plot = epoch
 decision_out = decision_outputs[epoch_to_plot - 1]
 
 # 绘制背景颜色（输入空间）
-ax.contourf(fine_grid_x, fine_grid_y, decision_out, levels=[0, 0.5, 1], colors=['#98FB98', '#DDA0DD'], alpha=0.3)
+ax.contourf(fine_grid_x, fine_grid_y, decision_out, levels=[0, 0.5, 1], colors=['#00BFFF', '#DDA0DD'], alpha=0.3)
 contour = ax.contour(fine_grid_x, fine_grid_y, decision_out, levels=[0.5], colors='k', linewidths=2)
 
 # 绘制输入空间的网格
