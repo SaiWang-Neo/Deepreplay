@@ -81,11 +81,11 @@
    - 显示隐藏层输出空间中的决策边界（黑色轮廓线）、网格变换（黑色细线）和数据点分布（红蓝散点）。
 
 ### 动画视频
-1. **输入空间动画**  
+1. **输入空间动画**
    <img src="input_space.gif" alt="Input Space with Boundary for Epoch 200" width="300" />
    - 展示了 200 个 epoch 中输入空间决策边界和网格的动态变化，坐标轴范围固定在 [-1, 1]。
 
-3. **特征空间动画**  
+2. **特征空间动画**
    <img src="feature_space.gif" alt="Feature Space with Boundary for Epoch 200" width="300" />
    - 展示了 200 个 epoch 中特征空间决策边界、网格和数据点的动态变化，坐标轴范围固定在 [0, 1]。
 
@@ -95,7 +95,7 @@
 - **动画**: 通过逐帧更新展示了训练过程中模型学习动态。
 
 ## 4. 注意事项
-- 若未安装 FFmpeg，动画保存会失败，可通过安装 FFmpeg 解决。
+- 若未安装 FFmpeg or PillowWriter ，动画保存会失败，可通过安装 FFmpeg or PillowWriter  解决。
 - 数据文件 `datasets.txt` 需与代码匹配，否则可能导致加载错误。
 - 静态图和动画的输出文件会保存在当前工作目录下。
 
