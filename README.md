@@ -82,11 +82,11 @@
 
 ### 动画视频
 1. **输入空间动画**
-   <img src="input_space.gif" alt="Input Space with Boundary for Epoch 200" width="300" />
+    <img src="input_space.gif" alt="Input Space with Boundary for Epoch 200" width="300" />
    - 展示了 200 个 epoch 中输入空间决策边界和网格的动态变化，坐标轴范围固定在 [-1, 1]。
 
-2. **特征空间动画**
-   <img src="feature_space.gif" alt="Feature Space with Boundary for Epoch 200" width="300" />
+2. **隐藏层特征空间动画**
+    <img src="feature_space.gif" alt="Feature Space with Boundary for Epoch 200" width="300" />
    - 展示了 200 个 epoch 中特征空间决策边界、网格和数据点的动态变化，坐标轴范围固定在 [0, 1]。
 
 ### 生成结果说明
