@@ -70,22 +70,21 @@
 以下是使用代码生成的两幅静态图和两个动画视频的展示：
 
 ### 静态图
-1. **输入空间 (Epoch 200)**  
-   ![Input Space with Boundary at Epoch 200](input_space_epoch200_boundary_pytorch.png)
+1. **输入空间 (Epoch 200)** 
+   <img src="input_space_epoch200_boundary_pytorch.png" alt="Input Space with Boundary at Epoch 200" width="300" />
    - 显示输入空间中的决策边界（黑色轮廓线）、网格变换（黑色细线）和数据点分布（红蓝散点）。
 
-2. **特征空间 (Epoch 200)**  
-   ![Feature Space with Boundary at Epoch 200](feature_space_epoch200_boundary_pytorch.png){ width=500 } 
+3. **特征空间 (Epoch 200)**  
+   <img src="feature_space_epoch200_boundary_pytorch.png" alt="Feature Space with Boundary at Epoch 200" width="300" />
    - 显示隐藏层输出空间中的决策边界（黑色轮廓线）、网格变换（黑色细线）和数据点分布（红蓝散点）。
 
 ### 动画视频
 1. **输入空间动画**  
-   ![Input Space with Boundary for Epoch 200](input_space.gif)
    <img src="input_space.gif" alt="Input Space with Boundary for Epoch 200" width="300" />
    - 展示了 200 个 epoch 中输入空间决策边界和网格的动态变化，坐标轴范围固定在 [-1, 1]。
 
 3. **特征空间动画**  
-   ![Feature Space with Boundary for Epoch 200](feature_space.gif) 
+   <img src="feature_space.gif" alt="Feature Space with Boundary for Epoch 200" width="300" />
    - 展示了 200 个 epoch 中特征空间决策边界、网格和数据点的动态变化，坐标轴范围固定在 [0, 1]。
 
 ### 生成结果说明
